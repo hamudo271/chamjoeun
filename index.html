@@ -8727,33 +8727,42 @@
           const target = e.target;
           
           // Identify close triggers:
-          // - Links with action=popup:close
-          // - Elementor's built-in X button (.dialog-close-button)
-          // - Any element inside them
-          const closeTrigger = target.closest(
-            'a[href*="action=popup:close"], .dialog-close-button'
-          );
+          // Check for links with popup:close action (handling both encoded and decoded)
+          // and Elementor's built-in X button
+          const closeLink = target.closest('a[href]');
+          const closeButton = target.closest('.dialog-close-button');
+          
+          let isCloseAction = false;
 
-          if (closeTrigger) {
+          if (closeButton) {
+            isCloseAction = true;
+          } else if (closeLink) {
+             const href = closeLink.getAttribute('href');
+             if (href && (href.includes('popup:close') || href.includes('popup%3Aclose'))) {
+                 isCloseAction = true;
+             }
+          }
+
+          if (isCloseAction) {
             // STOP Elementor from seeing this event
             e.preventDefault();
             e.stopPropagation();
             e.stopImmediatePropagation();
 
             // We only want to process the 'click' to actually hide the popup.
-            // For 'mousedown', we just block propagation to prevent early triggers.
             if (e.type === "click") {
               console.log("Isolated popup close action executed");
 
               // Find the specific popup container for THIS button
-              const dialogWidget = closeTrigger.closest(".dialog-widget");
+              const trigger = closeButton || closeLink;
+              const dialogWidget = trigger.closest(".dialog-widget");
               
               if (dialogWidget) {
                 // Hide only this specific popup
                 dialogWidget.style.display = "none";
               } else {
                  // Fallback for different structures
-                 const modal = closeTrigger.closest(".elementor-popup-modal");
+                 const modal = trigger.closest(".elementor-popup-modal");
                  if (modal) {
                      modal.style.display = "none";
                  }
