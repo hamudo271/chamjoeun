@@ -8960,51 +8960,34 @@
             }
         }
 
-      /* Flip Box Mobile Modification */
+      /* Flip Box Mobile Modification - Revert to "Show Back Face Only" */
       @media (max-width: 767px) {
         .elementor-element-c0c25c0 .elementor-flip-box,
         .elementor-element-52873b3 .elementor-flip-box,
         .elementor-element-b902c37 .elementor-flip-box {
-          height: auto !important;
-          min-height: 450px; /* Ensure enough space for both faces */
+          height: auto !important; /* Allow content to dictate height */
         }
 
-        .elementor-element-c0c25c0 .elementor-flip-box__layer,
-        .elementor-element-52873b3 .elementor-flip-box__layer,
-        .elementor-element-b902c37 .elementor-flip-box__layer {
-          position: relative !important;
-          display: block !important;
+        /* Hide Front Face (Image) */
+        .elementor-element-c0c25c0 .elementor-flip-box__front,
+        .elementor-element-52873b3 .elementor-flip-box__front,
+        .elementor-element-b902c37 .elementor-flip-box__front {
+          display: none !important;
+        }
+
+        /* Show Back Face (Text) permenantly */
+        .elementor-element-c0c25c0 .elementor-flip-box__back,
+        .elementor-element-52873b3 .elementor-flip-box__back,
+        .elementor-element-b902c37 .elementor-flip-box__back {
+          position: relative !important; /* Make it take up flow space */
+          display: flex !important; /* Restore flex layout if needed for centering */
           opacity: 1 !important;
           transform: none !important;
           top: auto !important;
           left: auto !important;
           width: 100% !important;
-        }
-
-        /* Front Face (Image) */
-        .elementor-element-c0c25c0 .elementor-flip-box__front,
-        .elementor-element-52873b3 .elementor-flip-box__front,
-        .elementor-element-b902c37 .elementor-flip-box__front {
-          height: 250px !important; /* Fixed height for image part */
-          margin-bottom: 0 !important;
-          border-radius: 15px 15px 0 0 !important; /* Rounded top corners */
-        }
-
-        /* Back Face (Text) */
-        .elementor-element-c0c25c0 .elementor-flip-box__back,
-        .elementor-element-52873b3 .elementor-flip-box__back,
-        .elementor-element-b902c37 .elementor-flip-box__back {
-          height: auto !important; /* Auto height for text content */
-          min-height: 150px;
-          padding: 20px !important;
-          background-color: #f9f9f9 !important; /* Light background for readability */
-          border-radius: 0 0 15px 15px !important; /* Rounded bottom corners */
-        }
-        
-        .elementor-element-c0c25c0 .elementor-flip-box__layer__overlay,
-        .elementor-element-52873b3 .elementor-flip-box__layer__overlay,
-        .elementor-element-b902c37 .elementor-flip-box__layer__overlay {
-            background-color: transparent !important; /* Remove overlay if it interferes */
+          height: auto !important;
+          min-height: 250px; /* Preserve some visual height if consistent with design */
         }
       }
     </style>
