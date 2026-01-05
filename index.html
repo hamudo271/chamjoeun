@@ -1974,6 +1974,32 @@
               data-element_type="container"
               data-settings='{"animation":"fadeInUp"}'
             >
+              <style>
+                @media (max-width: 767px) {
+                  /* Mobile Flip Box Fix: Show Back Content Always */
+                  .elementor-element-c0c25c0 .elementor-flip-box,
+                  .elementor-element-52873b3 .elementor-flip-box,
+                  .elementor-element-b902c37 .elementor-flip-box {
+                    height: auto !important;
+                    min-height: 200px;
+                  }
+                  .elementor-element-c0c25c0 .elementor-flip-box__layer,
+                  .elementor-element-52873b3 .elementor-flip-box__layer,
+                  .elementor-element-b902c37 .elementor-flip-box__layer {
+                    position: relative !important;
+                    display: block !important;
+                    transform: none !important;
+                    opacity: 1 !important;
+                    height: auto !important;
+                    min-height: 200px;
+                  }
+                  .elementor-element-c0c25c0 .elementor-flip-box__front,
+                  .elementor-element-52873b3 .elementor-flip-box__front,
+                  .elementor-element-b902c37 .elementor-flip-box__front {
+                    display: none !important; /* Hide front image on mobile to show text only/clearly */
+                  }
+                }
+              </style>
               <div class="e-con-inner">
                 <div
                   class="elementor-element elementor-element-c0c25c0 elementor-flip-box--effect-fade elementor-widget__width-initial elementor-widget elementor-widget-flip-box"
@@ -8959,37 +8985,6 @@
                 background-color: transparent !important;
             }
         }
-
-      /* Flip Box Mobile Modification - Revert to "Show Back Face Only" */
-      @media (max-width: 767px) {
-        .elementor-element-c0c25c0 .elementor-flip-box,
-        .elementor-element-52873b3 .elementor-flip-box,
-        .elementor-element-b902c37 .elementor-flip-box {
-          height: auto !important; /* Allow content to dictate height */
-        }
-
-        /* Hide Front Face (Image) */
-        .elementor-element-c0c25c0 .elementor-flip-box__front,
-        .elementor-element-52873b3 .elementor-flip-box__front,
-        .elementor-element-b902c37 .elementor-flip-box__front {
-          display: none !important;
-        }
-
-        /* Show Back Face (Text) permenantly */
-        .elementor-element-c0c25c0 .elementor-flip-box__back,
-        .elementor-element-52873b3 .elementor-flip-box__back,
-        .elementor-element-b902c37 .elementor-flip-box__back {
-          position: relative !important; /* Make it take up flow space */
-          display: flex !important; /* Restore flex layout if needed for centering */
-          opacity: 1 !important;
-          transform: none !important;
-          top: auto !important;
-          left: auto !important;
-          width: 100% !important;
-          height: auto !important;
-          min-height: 250px; /* Preserve some visual height if consistent with design */
-        }
-      }
     </style>
   </body>
 </html>
