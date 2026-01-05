@@ -8781,8 +8781,8 @@
     </script>
     <script>
       (function () {
-        // Mobile Video Autoplay Fix
-        document.addEventListener("DOMContentLoaded", function () {
+        // Mobile Video Autoplay Fix with MutationObserver
+        function forceMobileAutoplay() {
           const videoContainers = document.querySelectorAll(
             ".elementor-background-video-container"
           );
@@ -8794,42 +8794,63 @@
             // 1. Handle Native Video Tags
             const videos = container.querySelectorAll("video");
             videos.forEach((video) => {
-              video.setAttribute("playsinline", "");
-              video.setAttribute("webkit-playsinline", "");
-              video.setAttribute("muted", "");
-              video.muted = true; // JS property property
-              video.setAttribute("autoplay", "");
-              
-              video.play().catch((e) => {
-                console.warn("Mobile video autoplay blocked:", e);
-              });
+              if (!video.hasAttribute("played-processed")) {
+                  video.setAttribute("playsinline", "");
+                  video.setAttribute("webkit-playsinline", "");
+                  video.setAttribute("muted", "");
+                  video.muted = true;
+                  video.setAttribute("autoplay", "");
+                  video.setAttribute("played-processed", "true");
+                  
+                  video.play().catch((e) => {
+                    console.warn("Mobile video autoplay blocked:", e);
+                  });
+              }
             });
 
             // 2. Handle Vimeo/YouTube Iframes
             const iframes = container.querySelectorAll("iframe");
             iframes.forEach((iframe) => {
+              if (iframe.hasAttribute("data-processed")) return;
+              
               let src = iframe.getAttribute("src");
               if (src) {
-                 // Add vital parameters for mobile autoplay
-                 // playsinline=1, muted=1, background=1 (Vimeo specific)
                  let newSrc = src;
-                 if (!src.includes("playsinline=1")) newSrc += "&playsinline=1";
-                 if (!src.includes("muted=1")) newSrc += "&muted=1";
-                 if (!src.includes("background=1")) newSrc += "&background=1";
-                 if (!src.includes("autoplay=1")) newSrc += "&autoplay=1";
+                 // Ensure parameters are present
+                 if (!src.includes("playsinline=1")) newSrc += (newSrc.includes("?") ? "&" : "?") + "playsinline=1";
+                 if (!src.includes("muted=1")) newSrc += (newSrc.includes("?") ? "&" : "?") + "muted=1";
+                 if (!src.includes("background=1")) newSrc += (newSrc.includes("?") ? "&" : "?") + "background=1";
+                 if (!src.includes("autoplay=1")) newSrc += (newSrc.includes("?") ? "&" : "?") + "autoplay=1";
                  
                  if (src !== newSrc) {
                      iframe.setAttribute("src", newSrc);
                  }
                  
-                 // Add attributes to iframe tag itself for good measure
                  iframe.setAttribute("allow", "autoplay; fullscreen; picture-in-picture");
                  iframe.setAttribute("playsinline", "");
                  iframe.setAttribute("webkit-playsinline", "");
+                 iframe.setAttribute("data-processed", "true");
               }
             });
           });
+        }
+
+        // Run on load
+        document.addEventListener("DOMContentLoaded", forceMobileAutoplay);
+        window.addEventListener("load", forceMobileAutoplay);
+        
+        // Run on dynamic changes (Elementor loads things async)
+        const observer = new MutationObserver(function(mutations) {
+            let shouldRun = false;
+            mutations.forEach(function(mutation) {
+                if (mutation.addedNodes.length) {
+                    shouldRun = true;
+                }
+            });
+            if (shouldRun) forceMobileAutoplay();
         });
+        
+        observer.observe(document.body, { childList: true, subtree: true });
       })();
     </script>
     <style>
