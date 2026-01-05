@@ -8959,22 +8959,52 @@
                 background-color: transparent !important;
             }
         }
-    </style>
-    <style>
+
+      /* Flip Box Mobile Modification */
       @media (max-width: 767px) {
-        /* Force Flip Box Back Side for specific widgets */
-        .elementor-element-c0c25c0 .elementor-flip-box__front,
-        .elementor-element-52873b3 .elementor-flip-box__front,
-        .elementor-element-b902c37 .elementor-flip-box__front {
-          display: none !important;
+        .elementor-element-c0c25c0 .elementor-flip-box,
+        .elementor-element-52873b3 .elementor-flip-box,
+        .elementor-element-b902c37 .elementor-flip-box {
+          height: auto !important;
+          min-height: 450px; /* Ensure enough space for both faces */
         }
-        .elementor-element-c0c25c0 .elementor-flip-box__back,
-        .elementor-element-52873b3 .elementor-flip-box__back,
-        .elementor-element-b902c37 .elementor-flip-box__back {
+
+        .elementor-element-c0c25c0 .elementor-flip-box__layer,
+        .elementor-element-52873b3 .elementor-flip-box__layer,
+        .elementor-element-b902c37 .elementor-flip-box__layer {
+          position: relative !important;
           display: block !important;
           opacity: 1 !important;
           transform: none !important;
-          backface-visibility: visible !important;
+          top: auto !important;
+          left: auto !important;
+          width: 100% !important;
+        }
+
+        /* Front Face (Image) */
+        .elementor-element-c0c25c0 .elementor-flip-box__front,
+        .elementor-element-52873b3 .elementor-flip-box__front,
+        .elementor-element-b902c37 .elementor-flip-box__front {
+          height: 250px !important; /* Fixed height for image part */
+          margin-bottom: 0 !important;
+          border-radius: 15px 15px 0 0 !important; /* Rounded top corners */
+        }
+
+        /* Back Face (Text) */
+        .elementor-element-c0c25c0 .elementor-flip-box__back,
+        .elementor-element-52873b3 .elementor-flip-box__back,
+        .elementor-element-b902c37 .elementor-flip-box__back {
+          height: auto !important; /* Auto height for text content */
+          min-height: 150px;
+          padding: 20px !important;
+          background-color: #f9f9f9 !important; /* Light background for readability */
+          border-radius: 0 0 15px 15px !important; /* Rounded bottom corners */
+        }
+        
+        .elementor-element-c0c25c0 .elementor-flip-box__layer__overlay,
+        .elementor-element-52873b3 .elementor-flip-box__layer__overlay,
+        .elementor-element-b902c37 .elementor-flip-box__layer__overlay {
+            background-color: transparent !important; /* Remove overlay if it interferes */
         }
       }
     </style>
