@@ -960,6 +960,25 @@
       name="msapplication-TileImage"
       content="https://charmjoeun.com/wp-content/uploads/2025/07/참조은-파비콘.png"
     />
+
+    <style>
+      /* Custom CSS loop to handle multiple popups interaction */
+      /* Make the full-screen overlay click-through */
+      .elementor-popup-modal,
+      .dialog-widget,
+      .dialog-lightbox-widget {
+        pointer-events: none !important;
+        background-color: transparent !important; /* Remove individual dimming */
+      }
+
+      /* Make the actual popup content clickable */
+      .dialog-widget-content,
+      .dialog-message,
+      .elementor-location-popup,
+      .dialog-close-button {
+        pointer-events: auto !important;
+      }
+    </style>
   </head>
   <body
     data-rsssl="1"
