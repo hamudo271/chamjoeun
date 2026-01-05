@@ -1968,6 +1968,23 @@
                 서울대학교 출신 전문의 진료
               </h2>
             </div>
+            <style>
+              @media (max-width: 767px) {
+                .elementor-element-c0c25c0 .elementor-flip-box__front,
+                .elementor-element-52873b3 .elementor-flip-box__front,
+                .elementor-element-b902c37 .elementor-flip-box__front {
+                  opacity: 0 !important;
+                  z-index: 1 !important;
+                  pointer-events: none; /* Ensure clicks go through if needed, though mostly visual */
+                }
+                .elementor-element-c0c25c0 .elementor-flip-box__back,
+                .elementor-element-52873b3 .elementor-flip-box__back,
+                .elementor-element-b902c37 .elementor-flip-box__back {
+                  opacity: 1 !important;
+                  z-index: 2 !important;
+                }
+              }
+            </style>
             <div
               class="elementor-element elementor-element-94c75fe e-flex e-con-boxed elementor-invisible e-con e-child"
               data-id="94c75fe"
