@@ -8791,6 +8791,40 @@
             // Force container visibility
             container.style.display = "block";
             
+            // Check if container is empty (Elementor often skips rendering video on mobile)
+            // and inject Vimeo iframe manually if needed.
+            // Targeting the specific interview video section if generic check is too risky
+            // The interview video link is known: https://vimeo.com/1101963572
+            if (!container.querySelector('iframe') && !container.querySelector('video')) {
+                 const parentWidget = container.closest('.elementor-element');
+                 if (parentWidget) {
+                     const settings = parentWidget.getAttribute('data-settings');
+                     if (settings && settings.includes('1101963572')) {
+                         console.log("Injecting missing Vimeo iframe for mobile...");
+                         const iframe = document.createElement('iframe');
+                         iframe.src = "https://player.vimeo.com/video/1101963572?autoplay=1&muted=1&background=1&playsinline=1&loop=1&title=0&byline=0&portrait=0";
+                         iframe.style.width = "100%";
+                         iframe.style.height = "100%";
+                         iframe.style.position = "absolute";
+                         iframe.style.top = "50%";
+                         iframe.style.left = "50%";
+                         iframe.style.transform = "translate(-50%, -50%)";
+                         iframe.style.objectFit = "cover"; // Not supported on iframe but helpful logic
+                         // Vimeo specific sizing usually handled by CSS, but basic fill is needed
+                         
+                         // Create embed wrapper if missing
+                         let embed = container.querySelector('.elementor-background-video-embed');
+                         if (!embed) {
+                             embed = document.createElement('div');
+                             embed.className = 'elementor-background-video-embed';
+                             container.appendChild(embed);
+                         }
+                         embed.innerHTML = '';
+                         embed.appendChild(iframe);
+                     }
+                 }
+            }
+            
             // 1. Handle Native Video Tags
             const videos = container.querySelectorAll("video");
             videos.forEach((video) => {
@@ -8800,6 +8834,7 @@
                   video.setAttribute("muted", "");
                   video.muted = true;
                   video.setAttribute("autoplay", "");
+                  video.setAttribute("loop", "");
                   video.setAttribute("played-processed", "true");
                   
                   video.play().catch((e) => {
@@ -8860,9 +8895,29 @@
                 display: block !important;
                 visibility: visible !important;
                 height: 100% !important;
+                /* Ensure it sits above background image */
+                z-index: 0 !important; 
+                position: absolute !important;
+                top: 0; left: 0;
             }
             .elementor-background-video-embed {
                 display: block !important;
+                width: 100% !important;
+                height: 100% !important;
+            }
+            .elementor-background-video-embed iframe {
+                width: 100% !important;
+                height: 100% !important;
+                /* Vimeo scaling adjustment */
+                min-width: 100%;
+                min-height: 100%;
+            }
+            
+            /* Hide fallback background images on specific video sections */
+            /* Using the ID found in analysis: .elementor-element-a424003 represents the video container wrapper */
+            .elementor-element-a424003 {
+                background-image: none !important;
+                background-color: transparent !important;
             }
         }
     </style>
