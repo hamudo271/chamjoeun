@@ -4149,7 +4149,7 @@
                                   >
                                     <p>
                                       입안 제일 뒤쪽의 세 번째로 큰 어금니를
-                                      말합니다. 보통은 위턱에 2개, 아래턱에
+                                      말합니다.보통은 위턱에 2개, 아래턱에
                                       2개로 <br />모두 4개의 사랑니를 가지고
                                       있습니다.
                                     </p>
@@ -4157,7 +4157,7 @@
                                       하지만 현대에 와서는 턱뼈가 작아지고
                                       <br />치아 보철술의 발달로 어금니의
                                       상실률이 낮아지게 되면서<br />나와야 할
-                                      치아가 공간상의 문제로 나오지 못하고 턱뼈
+                                      치아가 공간상의 문제로나오지 못하고 턱뼈
                                       속에 묻히게 되는 경우가 많습니다.
                                     </p>
                                   </div>
@@ -8679,6 +8679,54 @@
                 : t.wpemoji && t.twemoji && (r(t.twemoji), r(t.wpemoji)));
         });
       //# sourceURL=https://charmjoeun.com/wp-includes/js/wp-emoji-loader.min.js
+    </script>
+
+    <script>
+      jQuery(document).ready(function ($) {
+        // Override Elementor popup close action links
+        $(document).on(
+          "click",
+          'a[href*="action=popup:close"]',
+          function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+            e.stopImmediatePropagation();
+
+            // Find the closest dialog widget (popup container)
+            var $targetPopupContent = $(this).closest(
+              ".elementor-location-popup"
+            );
+            var $dialogWidget = $targetPopupContent.closest(".dialog-widget");
+
+            // If found, hide it directly
+            if ($dialogWidget.length) {
+              $dialogWidget.hide();
+            } else {
+              // Fallback: try to find by ID if the link is not inside the popup (remote close)
+              // But the user asked for "closing the popup I want", usually implying the one with the button.
+              // If the button is INSIDE the popup, this works.
+              
+              // Also try hiding the .elementor-popup-modal direct parent if dialog-widget is not found
+               var $modal = $(this).closest('.elementor-popup-modal');
+               if ($modal.length) {
+                   $modal.hide();
+               }
+            }
+          }
+        );
+
+        // Override default Elementor close button (X button)
+        $(document).on("click", ".dialog-close-button", function (e) {
+          e.preventDefault();
+          e.stopPropagation();
+          e.stopImmediatePropagation();
+          $(this).closest(".dialog-widget").hide();
+        });
+        
+        // Ensure background click also closes only the top-most or specific popup? 
+        // Elementor default is close on background click. 
+        // We will leave background click behavior as is for now, as user specifically asked for "close or x button".
+      });
     </script>
   </body>
 </html>
