@@ -8963,35 +8963,47 @@
     <style>
       @media (max-width: 767px) {
         /* Force Flipbox Back Face on Mobile for "Seoul National University Specialist" section */
+        /* Front Face: Keep Visible (for background image) */
         .elementor-element-c0c25c0 .elementor-flip-box__front,
         .elementor-element-52873b3 .elementor-flip-box__front,
         .elementor-element-b902c37 .elementor-flip-box__front {
-          opacity: 0 !important;
-          visibility: hidden !important;
-          display: none !important; /* Ensure it doesn't take up space if needed, though opacity swap is usually standard for flipboxes */
+          opacity: 1 !important;
+          visibility: visible !important;
+          display: block !important;
+          z-index: 1; /* Ensure it stays behind */
         }
 
+        /* Back Face: Make Visible and Overlay */
         .elementor-element-c0c25c0 .elementor-flip-box__back,
         .elementor-element-52873b3 .elementor-flip-box__back,
         .elementor-element-b902c37 .elementor-flip-box__back {
           opacity: 1 !important;
           visibility: visible !important;
-          transform: none !important; /* Reset rotation */
+          transform: none !important;
           clip-path: none !important;
+          z-index: 2; /* Ensure text is on top */
+          background-color: transparent !important; /* Make back bg transparent to show front image */
         }
         
-        /* Ensure the container shows the back layer immediately */
+        /* Ensure the container shows the layers correctly */
         .elementor-element-c0c25c0 .elementor-flip-box__layer,
         .elementor-element-52873b3 .elementor-flip-box__layer,
         .elementor-element-b902c37 .elementor-flip-box__layer {
              transition: none !important;
         }
         
-        /* Specific fix for transparency if front layer was covering */
+        /* Reset any transform on the main container */
         .elementor-element-c0c25c0 .elementor-flip-box,
         .elementor-element-52873b3 .elementor-flip-box,
         .elementor-element-b902c37 .elementor-flip-box {
-             transform: none !important; /* potentially needed if the parent flip box rotates */
+             transform: none !important;
+        }
+
+        /* Hide the overlay on the back face if it blocks the front image */
+        .elementor-element-c0c25c0 .elementor-flip-box__back .elementor-flip-box__layer__overlay,
+        .elementor-element-52873b3 .elementor-flip-box__back .elementor-flip-box__layer__overlay,
+        .elementor-element-b902c37 .elementor-flip-box__back .elementor-flip-box__layer__overlay {
+            background: none !important;
         }
       }
     </style>
