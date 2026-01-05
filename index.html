@@ -8681,52 +8681,48 @@
       //# sourceURL=https://charmjoeun.com/wp-includes/js/wp-emoji-loader.min.js
     </script>
 
+
     <script>
-      jQuery(document).ready(function ($) {
-        // Override Elementor popup close action links
-        $(document).on(
-          "click",
-          'a[href*="action=popup:close"]',
-          function (e) {
+      // Vanilla JS with Event Capturing to ensure priority over Elementor's handlers
+      document.addEventListener(
+        "click",
+        function (e) {
+          // Check if the clicked element is a popup close trigger
+          // 1. Link with popup:close action
+          // 2. Elementor default close button (.dialog-close-button)
+          var target = e.target;
+          var closeTrigger = target.closest(
+            'a[href*="action=popup:close"], .dialog-close-button'
+          );
+
+          if (closeTrigger) {
+            // Prevent default behavior and stop propagation immediately
+            // This stops Elementor/LIFO stack logic from running
             e.preventDefault();
             e.stopPropagation();
             e.stopImmediatePropagation();
 
-            // Find the closest dialog widget (popup container)
-            var $targetPopupContent = $(this).closest(
-              ".elementor-location-popup"
-            );
-            var $dialogWidget = $targetPopupContent.closest(".dialog-widget");
+            console.log("Custom popup close triggered");
 
-            // If found, hide it directly
-            if ($dialogWidget.length) {
-              $dialogWidget.hide();
+            // Find the popup container to hide
+            // Elementor popups are usually wrapped in .dialog-widget
+            var dialogWidget = closeTrigger.closest(".dialog-widget");
+            
+            if (dialogWidget) {
+              dialogWidget.style.display = "none";
+              // Also try to remove the 'dialog-lightbox-widget-content' class or similar if needed, 
+              // but hiding .dialog-widget is usually enough as it wraps everything.
             } else {
-              // Fallback: try to find by ID if the link is not inside the popup (remote close)
-              // But the user asked for "closing the popup I want", usually implying the one with the button.
-              // If the button is INSIDE the popup, this works.
-              
-              // Also try hiding the .elementor-popup-modal direct parent if dialog-widget is not found
-               var $modal = $(this).closest('.elementor-popup-modal');
-               if ($modal.length) {
-                   $modal.hide();
+               // Fallback: try to find .elementor-popup-modal if .dialog-widget is structure differently
+               var modal = closeTrigger.closest(".elementor-popup-modal");
+               if (modal) {
+                   modal.style.display = "none";
                }
             }
           }
-        );
-
-        // Override default Elementor close button (X button)
-        $(document).on("click", ".dialog-close-button", function (e) {
-          e.preventDefault();
-          e.stopPropagation();
-          e.stopImmediatePropagation();
-          $(this).closest(".dialog-widget").hide();
-        });
-        
-        // Ensure background click also closes only the top-most or specific popup? 
-        // Elementor default is close on background click. 
-        // We will leave background click behavior as is for now, as user specifically asked for "close or x button".
-      });
+        },
+        true // USE CAPTURE: This is the key. Intercept event on the way down.
+      );
     </script>
   </body>
 </html>
