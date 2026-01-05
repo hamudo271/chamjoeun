@@ -8960,5 +8960,40 @@
             }
         }
     </style>
+    <style>
+      @media (max-width: 767px) {
+        /* Force Flipbox Back Face on Mobile for "Seoul National University Specialist" section */
+        .elementor-element-c0c25c0 .elementor-flip-box__front,
+        .elementor-element-52873b3 .elementor-flip-box__front,
+        .elementor-element-b902c37 .elementor-flip-box__front {
+          opacity: 0 !important;
+          visibility: hidden !important;
+          display: none !important; /* Ensure it doesn't take up space if needed, though opacity swap is usually standard for flipboxes */
+        }
+
+        .elementor-element-c0c25c0 .elementor-flip-box__back,
+        .elementor-element-52873b3 .elementor-flip-box__back,
+        .elementor-element-b902c37 .elementor-flip-box__back {
+          opacity: 1 !important;
+          visibility: visible !important;
+          transform: none !important; /* Reset rotation */
+          clip-path: none !important;
+        }
+        
+        /* Ensure the container shows the back layer immediately */
+        .elementor-element-c0c25c0 .elementor-flip-box__layer,
+        .elementor-element-52873b3 .elementor-flip-box__layer,
+        .elementor-element-b902c37 .elementor-flip-box__layer {
+             transition: none !important;
+        }
+        
+        /* Specific fix for transparency if front layer was covering */
+        .elementor-element-c0c25c0 .elementor-flip-box,
+        .elementor-element-52873b3 .elementor-flip-box,
+        .elementor-element-b902c37 .elementor-flip-box {
+             transform: none !important; /* potentially needed if the parent flip box rotates */
+        }
+      }
+    </style>
   </body>
 </html>
