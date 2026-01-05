@@ -1968,23 +1968,6 @@
                 서울대학교 출신 전문의 진료
               </h2>
             </div>
-            <style>
-              @media (max-width: 767px) {
-                .elementor-element-c0c25c0 .elementor-flip-box__front,
-                .elementor-element-52873b3 .elementor-flip-box__front,
-                .elementor-element-b902c37 .elementor-flip-box__front {
-                  opacity: 0 !important;
-                  z-index: 1 !important;
-                  pointer-events: none; /* Ensure clicks go through if needed, though mostly visual */
-                }
-                .elementor-element-c0c25c0 .elementor-flip-box__back,
-                .elementor-element-52873b3 .elementor-flip-box__back,
-                .elementor-element-b902c37 .elementor-flip-box__back {
-                  opacity: 1 !important;
-                  z-index: 2 !important;
-                }
-              }
-            </style>
             <div
               class="elementor-element elementor-element-94c75fe e-flex e-con-boxed elementor-invisible e-con e-child"
               data-id="94c75fe"
@@ -2171,27 +2154,7 @@
                 <div class="elementor-divider">
                   <span class="elementor-divider-separator"> </span>
                 </div>
-                </div>
               </div>
-              <style>
-                @media (max-width: 767px) {
-                  .elementor-element-720cc8b .elementor-flip-box__front,
-                  .elementor-element-e78d27b .elementor-flip-box__front,
-                  .elementor-element-c1b6166 .elementor-flip-box__front,
-                  .elementor-element-85d732b .elementor-flip-box__front {
-                    opacity: 0 !important;
-                    z-index: 1 !important;
-                    pointer-events: none;
-                  }
-                  .elementor-element-720cc8b .elementor-flip-box__back,
-                  .elementor-element-e78d27b .elementor-flip-box__back,
-                  .elementor-element-c1b6166 .elementor-flip-box__back,
-                  .elementor-element-85d732b .elementor-flip-box__back {
-                    opacity: 1 !important;
-                    z-index: 2 !important;
-                  }
-                }
-              </style>
               <div
                 class="elementor-element elementor-element-3006471 e-con-full e-flex e-con e-child"
                 data-id="3006471"
@@ -8996,6 +8959,24 @@
                 background-color: transparent !important;
             }
         }
+    </style>
+    <style>
+      @media (max-width: 767px) {
+        /* Force Flip Box Back Side for specific widgets */
+        .elementor-element-c0c25c0 .elementor-flip-box__front,
+        .elementor-element-52873b3 .elementor-flip-box__front,
+        .elementor-element-b902c37 .elementor-flip-box__front {
+          display: none !important;
+        }
+        .elementor-element-c0c25c0 .elementor-flip-box__back,
+        .elementor-element-52873b3 .elementor-flip-box__back,
+        .elementor-element-b902c37 .elementor-flip-box__back {
+          display: block !important;
+          opacity: 1 !important;
+          transform: none !important;
+          backface-visibility: visible !important;
+        }
+      }
     </style>
   </body>
 </html>
