@@ -8702,46 +8702,68 @@
 
 
     <script>
-      // Vanilla JS with Event Capturing to ensure priority over Elementor's handlers
-      document.addEventListener(
-        "click",
-        function (e) {
-          // Check if the clicked element is a popup close trigger
-          // 1. Link with popup:close action
-          // 2. Elementor default close button (.dialog-close-button)
-          var target = e.target;
-          var closeTrigger = target.closest(
+      (function () {
+        // Aggressive Event Interception to isolate popup closing behavior
+        const events = ["click", "mousedown", "keydown"];
+
+        function handleEvent(e) {
+          // 1. Block ESC key (Prevent Elementor from closing all/top popup via keyboard)
+          if (e.type === "keydown") {
+            if (e.key === "Escape" || e.keyCode === 27) {
+              e.preventDefault();
+              e.stopPropagation();
+              e.stopImmediatePropagation();
+              console.log("ESC key blocked");
+            }
+            return;
+          }
+
+          // 2. Handle Mouse Events (Click/Mousedown)
+          const target = e.target;
+          
+          // Identify close triggers:
+          // - Links with action=popup:close
+          // - Elementor's built-in X button (.dialog-close-button)
+          // - Any element inside them
+          const closeTrigger = target.closest(
             'a[href*="action=popup:close"], .dialog-close-button'
           );
 
           if (closeTrigger) {
-            // Prevent default behavior and stop propagation immediately
-            // This stops Elementor/LIFO stack logic from running
+            // STOP Elementor from seeing this event
             e.preventDefault();
             e.stopPropagation();
             e.stopImmediatePropagation();
 
-            console.log("Custom popup close triggered");
+            // We only want to process the 'click' to actually hide the popup.
+            // For 'mousedown', we just block propagation to prevent early triggers.
+            if (e.type === "click") {
+              console.log("Isolated popup close action executed");
 
-            // Find the popup container to hide
-            // Elementor popups are usually wrapped in .dialog-widget
-            var dialogWidget = closeTrigger.closest(".dialog-widget");
-            
-            if (dialogWidget) {
-              dialogWidget.style.display = "none";
-              // Also try to remove the 'dialog-lightbox-widget-content' class or similar if needed, 
-              // but hiding .dialog-widget is usually enough as it wraps everything.
-            } else {
-               // Fallback: try to find .elementor-popup-modal if .dialog-widget is structure differently
-               var modal = closeTrigger.closest(".elementor-popup-modal");
-               if (modal) {
-                   modal.style.display = "none";
-               }
+              // Find the specific popup container for THIS button
+              const dialogWidget = closeTrigger.closest(".dialog-widget");
+              
+              if (dialogWidget) {
+                // Hide only this specific popup
+                dialogWidget.style.display = "none";
+              } else {
+                 // Fallback for different structures
+                 const modal = closeTrigger.closest(".elementor-popup-modal");
+                 if (modal) {
+                     modal.style.display = "none";
+                 }
+              }
             }
+            return false;
           }
-        },
-        true // USE CAPTURE: This is the key. Intercept event on the way down.
-      );
+        }
+
+        // Attach listeners to window with Capture phase (true)
+        // This ensures our code runs BEFORE Elementor/jQuery
+        events.forEach((evt) => {
+          window.addEventListener(evt, handleEvent, true);
+        });
+      })();
     </script>
   </body>
 </html>
