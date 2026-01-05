@@ -1976,7 +1976,7 @@
             >
               <style>
                 @media (max-width: 767px) {
-                  /* Mobile Flip Box Fix: Show Back Content Always */
+                  /* Mobile Flip Box Fix: Show Both Sides Stacked */
                   .elementor-element-c0c25c0 .elementor-flip-box,
                   .elementor-element-52873b3 .elementor-flip-box,
                   .elementor-element-b902c37 .elementor-flip-box {
@@ -1991,13 +1991,15 @@
                     transform: none !important;
                     opacity: 1 !important;
                     height: auto !important;
-                    min-height: 200px;
                   }
+                  /* Ensure Front (Image) is visible and on top */
                   .elementor-element-c0c25c0 .elementor-flip-box__front,
                   .elementor-element-52873b3 .elementor-flip-box__front,
                   .elementor-element-b902c37 .elementor-flip-box__front {
-                    display: none !important; /* Hide front image on mobile to show text only/clearly */
+                    display: block !important;
+                    margin-bottom: 0px; /* Optional: Adjust spacing if needed */
                   }
+                  /* Back (Text) follows naturally */
                 }
               </style>
               <div class="e-con-inner">
