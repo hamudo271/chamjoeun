@@ -8962,11 +8962,15 @@
     </style>
     <style>
       @media (max-width: 767px) {
-        /* Force Flipbox Back Face on Mobile for "Seoul National University Specialist" section */
+        /* Force Flipbox Back Face on Mobile for "Seoul National University Specialist" & "4 Principles" sections */
         /* Front Face: Keep Visible (for background image) */
         .elementor-element-c0c25c0 .elementor-flip-box__front,
         .elementor-element-52873b3 .elementor-flip-box__front,
-        .elementor-element-b902c37 .elementor-flip-box__front {
+        .elementor-element-b902c37 .elementor-flip-box__front,
+        .elementor-element-720cc8b .elementor-flip-box__front,
+        .elementor-element-e78d27b .elementor-flip-box__front,
+        .elementor-element-c1b6166 .elementor-flip-box__front,
+        .elementor-element-85d732b .elementor-flip-box__front {
           opacity: 1 !important;
           visibility: visible !important;
           display: block !important;
@@ -8976,7 +8980,11 @@
         /* Back Face: Make Visible and Overlay */
         .elementor-element-c0c25c0 .elementor-flip-box__back,
         .elementor-element-52873b3 .elementor-flip-box__back,
-        .elementor-element-b902c37 .elementor-flip-box__back {
+        .elementor-element-b902c37 .elementor-flip-box__back,
+        .elementor-element-720cc8b .elementor-flip-box__back,
+        .elementor-element-e78d27b .elementor-flip-box__back,
+        .elementor-element-c1b6166 .elementor-flip-box__back,
+        .elementor-element-85d732b .elementor-flip-box__back {
           opacity: 1 !important;
           visibility: visible !important;
           transform: none !important;
@@ -8988,21 +8996,33 @@
         /* Ensure the container shows the layers correctly */
         .elementor-element-c0c25c0 .elementor-flip-box__layer,
         .elementor-element-52873b3 .elementor-flip-box__layer,
-        .elementor-element-b902c37 .elementor-flip-box__layer {
+        .elementor-element-b902c37 .elementor-flip-box__layer,
+        .elementor-element-720cc8b .elementor-flip-box__layer,
+        .elementor-element-e78d27b .elementor-flip-box__layer,
+        .elementor-element-c1b6166 .elementor-flip-box__layer,
+        .elementor-element-85d732b .elementor-flip-box__layer {
              transition: none !important;
         }
         
         /* Reset any transform on the main container */
         .elementor-element-c0c25c0 .elementor-flip-box,
         .elementor-element-52873b3 .elementor-flip-box,
-        .elementor-element-b902c37 .elementor-flip-box {
+        .elementor-element-b902c37 .elementor-flip-box,
+        .elementor-element-720cc8b .elementor-flip-box,
+        .elementor-element-e78d27b .elementor-flip-box,
+        .elementor-element-c1b6166 .elementor-flip-box,
+        .elementor-element-85d732b .elementor-flip-box {
              transform: none !important;
         }
 
         /* Hide the overlay on the back face if it blocks the front image */
         .elementor-element-c0c25c0 .elementor-flip-box__back .elementor-flip-box__layer__overlay,
         .elementor-element-52873b3 .elementor-flip-box__back .elementor-flip-box__layer__overlay,
-        .elementor-element-b902c37 .elementor-flip-box__back .elementor-flip-box__layer__overlay {
+        .elementor-element-b902c37 .elementor-flip-box__back .elementor-flip-box__layer__overlay,
+        .elementor-element-720cc8b .elementor-flip-box__back .elementor-flip-box__layer__overlay,
+        .elementor-element-e78d27b .elementor-flip-box__back .elementor-flip-box__layer__overlay,
+        .elementor-element-c1b6166 .elementor-flip-box__back .elementor-flip-box__layer__overlay,
+        .elementor-element-85d732b .elementor-flip-box__back .elementor-flip-box__layer__overlay {
             background: none !important;
         }
       }
