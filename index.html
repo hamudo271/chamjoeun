@@ -8822,6 +8822,9 @@
       (function () {
         // Mobile Video Autoplay Fix with MutationObserver
         function forceMobileAutoplay() {
+          // Restriction: Only run on separate mobile view (Elementor default breakpoint is usually 768px or 1025px depending on settings, sticking to 767px mobile max)
+          if (window.innerWidth > 767) return;
+
           const videoContainers = document.querySelectorAll(
             ".elementor-background-video-container"
           );
