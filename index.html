@@ -9038,6 +9038,19 @@
         .mobile-block-text {
             display: block;
         }
+
+        /* Reduce Interview Section Spacing on Mobile */
+        #s1 .e-con-inner {
+            padding-top: 20px !important;
+            padding-bottom: 20px !important;
+        }
+        #s1 .elementor-element-009b9bf {
+            padding-top: 0px !important;
+            padding-bottom: 0px !important;
+        }
+        #s1 {
+             min-height: auto !important;
+        }
       }
     </style>
     <style>
@@ -9048,9 +9061,7 @@
 
         /* Adjust 2nd Section (Interview) Height and Font Size */
         #s1 {
-            aspect-ratio: 16 / 9 !important;
-            min-height: unset !important;
-            height: auto !important;
+            min-height: 600px !important; /* reduced from ~950px */
         }
         #s1 .e-con-inner {
             padding-bottom: 40px !important; /* reduced from 100px */
