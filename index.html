@@ -9085,6 +9085,9 @@
              min-height: auto !important;
         }
 
+        /* Interview Video Title Font Increase */
+
+
         /* Advanced Equipment Mobile Layout */
         /* Reduce header font size */
         .elementor-element-c0f4c3d .elementor-heading-title {
@@ -9148,15 +9151,24 @@
         }
 
         /* Readability & Overlay Fix for Advanced Equipment */
+        /* Target Back Body & Overlay to ensure background is visible */
         .elementor-element-f3825e6 .elementor-flip-box__back,
         .elementor-element-449a74c .elementor-flip-box__back,
         .elementor-element-0c462d8 .elementor-flip-box__back,
         .elementor-element-a0b304f .elementor-flip-box__back,
         .elementor-element-5afe2a1 .elementor-flip-box__back,
-        .elementor-element-8198967 .elementor-flip-box__back {
-            background-color: rgba(0, 0, 0, 0.45) !important;
+        .elementor-element-8198967 .elementor-flip-box__back,
+        .elementor-element-f3825e6 .elementor-flip-box__back .elementor-flip-box__layer__overlay,
+        .elementor-element-449a74c .elementor-flip-box__back .elementor-flip-box__layer__overlay,
+        .elementor-element-0c462d8 .elementor-flip-box__back .elementor-flip-box__layer__overlay,
+        .elementor-element-a0b304f .elementor-flip-box__back .elementor-flip-box__layer__overlay,
+        .elementor-element-5afe2a1 .elementor-flip-box__back .elementor-flip-box__layer__overlay,
+        .elementor-element-8198967 .elementor-flip-box__back .elementor-flip-box__layer__overlay {
+            background-color: rgba(0, 0, 0, 0.75) !important;
+            background: rgba(0, 0, 0, 0.75) !important;
         }
 
+        /* Ensure Text is white and ledgible */
         .elementor-element-f3825e6 .elementor-flip-box__layer__title,
         .elementor-element-449a74c .elementor-flip-box__layer__title,
         .elementor-element-0c462d8 .elementor-flip-box__layer__title,
@@ -9169,8 +9181,34 @@
         .elementor-element-a0b304f .elementor-flip-box__layer__description,
         .elementor-element-5afe2a1 .elementor-flip-box__layer__description,
         .elementor-element-8198967 .elementor-flip-box__layer__description {
-            text-shadow: 0 1px 3px rgba(0, 0, 0, 0.8) !important;
+            text-shadow: 0 1px 3px rgba(0, 0, 0, 0.9) !important;
             color: #ffffff !important;
+            opacity: 1 !important;
+            visibility: visible !important;
+        }
+
+        /* Hide FRONT FACE Text so it doesn't clash with the back face text */
+        .elementor-element-f3825e6 .elementor-flip-box__front .elementor-flip-box__layer__title,
+        .elementor-element-449a74c .elementor-flip-box__front .elementor-flip-box__layer__title,
+        .elementor-element-0c462d8 .elementor-flip-box__front .elementor-flip-box__layer__title,
+        .elementor-element-a0b304f .elementor-flip-box__front .elementor-flip-box__layer__title,
+        .elementor-element-5afe2a1 .elementor-flip-box__front .elementor-flip-box__layer__title,
+        .elementor-element-8198967 .elementor-flip-box__front .elementor-flip-box__layer__title,
+        .elementor-element-f3825e6 .elementor-flip-box__front .elementor-flip-box__layer__description,
+        .elementor-element-449a74c .elementor-flip-box__front .elementor-flip-box__layer__description,
+        .elementor-element-0c462d8 .elementor-flip-box__front .elementor-flip-box__layer__description,
+        .elementor-element-a0b304f .elementor-flip-box__front .elementor-flip-box__layer__description,
+        .elementor-element-5afe2a1 .elementor-flip-box__front .elementor-flip-box__layer__description,
+        .elementor-element-8198967 .elementor-flip-box__front .elementor-flip-box__layer__description,
+        /* Also hide overlay/icon if present to clear view */
+        .elementor-element-f3825e6 .elementor-flip-box__front .elementor-flip-box__icon-image,
+        .elementor-element-449a74c .elementor-flip-box__front .elementor-flip-box__icon-image,
+        .elementor-element-0c462d8 .elementor-flip-box__front .elementor-flip-box__icon-image,
+        .elementor-element-a0b304f .elementor-flip-box__front .elementor-flip-box__icon-image,
+        .elementor-element-5afe2a1 .elementor-flip-box__front .elementor-flip-box__icon-image,
+        .elementor-element-8198967 .elementor-flip-box__front .elementor-flip-box__icon-image {
+             display: none !important;
+             opacity: 0 !important;
         }
       }
     </style>
@@ -9180,15 +9218,26 @@
             min-height: 600px !important;
         }
 
-        /* Adjust 2nd Section (Interview) Height and Font Size */
-        #s1 {
-            min-height: 600px !important; /* reduced from ~950px */
-        }
-        #s1 .e-con-inner {
-            padding-bottom: 40px !important; /* reduced from 100px */
-        }
-        #s1 .elementor-heading-title {
-            font-size: 20px !important; /* reduced from 30px */
+        /* Adjust 2nd Section (Interview) Height and Font Size - MOBILE ONLY */
+        @media (max-width: 767px) {
+            #s1 {
+                min-height: 400px !important; /* reduced from 600px to reduce spacing */
+            }
+            #s1 .e-con-inner {
+                 padding-top: 20px !important;
+                 padding-bottom: 20px !important;
+            }
+            #s1 .elementor-heading-title {
+                font-size: 24px !important; /* Mobile: 24px */
+            }
+            
+            /* Tab Description Font Size */
+            .elementor-widget-n-tabs .elementor-widget-text-editor p,
+            .elementor-widget-n-tabs .elementor-widget-text-editor span,
+            .elementor-widget-n-tabs .elementor-widget-text-editor div {
+                font-size: 11px !important; 
+                line-height: 1.6 !important; /* improved readability for small text */
+            }
         }
 
         /* Adjust Flipbox Titles (SNU Specialist Section) */
@@ -9200,5 +9249,6 @@
              word-break: keep-all !important;
         }
     </style>
+
   </body>
 </html>
