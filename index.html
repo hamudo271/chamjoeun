@@ -9190,7 +9190,7 @@
             color: #ffffff !important;
             opacity: 1 !important;
             visibility: visible !important;
-            font-size: 13px !important;
+            font-size: 17px !important; /* Mobile: Increased by 4px (13px -> 17px) */
         }
 
         .elementor-element-f3825e6 .elementor-flip-box__layer__description,
@@ -9279,6 +9279,22 @@
              font-size: 18px !important;
              white-space: nowrap !important;
              word-break: keep-all !important;
+        }
+        
+        /* PC Font Size Adjustment (min-width: 768px) */
+        @media (min-width: 768px) {
+            .elementor-element-f3825e6 .elementor-flip-box__layer__title,
+            .elementor-element-449a74c .elementor-flip-box__layer__title,
+            .elementor-element-0c462d8 .elementor-flip-box__layer__title,
+            .elementor-element-5afe2a1 .elementor-flip-box__layer__title,
+            .elementor-element-8198967 .elementor-flip-box__layer__title,
+            .elementor-element-1139b39 .elementor-flip-box__layer__title {
+                 font-size: 30px !important; /* PC: Reduced by 4px (34px -> 30px) */
+            }
+            /* Special case for longer title */
+            .elementor-element-a0b304f .elementor-flip-box__layer__title {
+                 font-size: 26px !important; /* PC: Reduced by 4px (30px -> 26px) */
+            }
         }
     </style>
 
