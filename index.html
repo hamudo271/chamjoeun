@@ -9119,35 +9119,40 @@
             flex-wrap: wrap !important;
             width: 100% !important;
             max-width: 100% !important;
-            padding: 0 !important;
-            gap: 0 !important;
+            padding-left: 10px !important;
+            padding-right: 10px !important;
+            gap: 10px !important;
         }
 
-        /* Set flipboxes grid cells to 50% width */
+        /* Set flipboxes grid cells to calc(50% - 5px) width for 2 columns with 10px gap */
         .elementor-element-f3825e6,
         .elementor-element-449a74c,
         .elementor-element-0c462d8,
         .elementor-element-a0b304f,
         .elementor-element-5afe2a1,
-        .elementor-element-8198967 {
-            width: 50% !important;
-            max-width: 50% !important;
+        .elementor-element-8198967,
+        .elementor-element-1139b39 {
+            width: calc(50% - 5px) !important;
+            max-width: calc(50% - 5px) !important;
             min-width: 0 !important;
-            flex: 0 0 50% !important;
+            flex: 0 0 calc(50% - 5px) !important;
             margin: 0 !important;
-            padding: 5px !important;
+            padding: 0 !important;
             box-sizing: border-box !important;
         }
 
-        /* RESIZE REQUEST: 60% of the grid cell */
+        /* RESIZE REQUEST: Square Aspect Ratio (1:1) */
         .elementor-element-f3825e6 .elementor-flip-box,
         .elementor-element-449a74c .elementor-flip-box,
         .elementor-element-0c462d8 .elementor-flip-box,
         .elementor-element-a0b304f .elementor-flip-box,
         .elementor-element-5afe2a1 .elementor-flip-box,
-        .elementor-element-8198967 .elementor-flip-box {
-             width: 95% !important;
-             margin: 0 auto !important;
+        .elementor-element-8198967 .elementor-flip-box,
+        .elementor-element-1139b39 .elementor-flip-box {
+             width: 100% !important;
+             height: auto !important;
+             aspect-ratio: 1 / 1 !important;
+             margin: 0 !important;
         }
 
         /* Readability & Overlay Fix for Advanced Equipment */
@@ -9158,12 +9163,14 @@
         .elementor-element-a0b304f .elementor-flip-box__back,
         .elementor-element-5afe2a1 .elementor-flip-box__back,
         .elementor-element-8198967 .elementor-flip-box__back,
+        .elementor-element-1139b39 .elementor-flip-box__back,
         .elementor-element-f3825e6 .elementor-flip-box__back .elementor-flip-box__layer__overlay,
         .elementor-element-449a74c .elementor-flip-box__back .elementor-flip-box__layer__overlay,
         .elementor-element-0c462d8 .elementor-flip-box__back .elementor-flip-box__layer__overlay,
         .elementor-element-a0b304f .elementor-flip-box__back .elementor-flip-box__layer__overlay,
         .elementor-element-5afe2a1 .elementor-flip-box__back .elementor-flip-box__layer__overlay,
-        .elementor-element-8198967 .elementor-flip-box__back .elementor-flip-box__layer__overlay {
+        .elementor-element-8198967 .elementor-flip-box__back .elementor-flip-box__layer__overlay,
+        .elementor-element-1139b39 .elementor-flip-box__back .elementor-flip-box__layer__overlay {
             background-color: rgba(0, 0, 0, 0.75) !important;
             background: rgba(0, 0, 0, 0.75) !important;
         }
@@ -9175,12 +9182,14 @@
         .elementor-element-a0b304f .elementor-flip-box__layer__title,
         .elementor-element-5afe2a1 .elementor-flip-box__layer__title,
         .elementor-element-8198967 .elementor-flip-box__layer__title,
+        .elementor-element-1139b39 .elementor-flip-box__layer__title,
         .elementor-element-f3825e6 .elementor-flip-box__layer__description,
         .elementor-element-449a74c .elementor-flip-box__layer__description,
         .elementor-element-0c462d8 .elementor-flip-box__layer__description,
         .elementor-element-a0b304f .elementor-flip-box__layer__description,
         .elementor-element-5afe2a1 .elementor-flip-box__layer__description,
-        .elementor-element-8198967 .elementor-flip-box__layer__description {
+        .elementor-element-8198967 .elementor-flip-box__layer__description,
+        .elementor-element-1139b39 .elementor-flip-box__layer__description {
             text-shadow: 0 1px 3px rgba(0, 0, 0, 0.9) !important;
             color: #ffffff !important;
             opacity: 1 !important;
@@ -9194,19 +9203,22 @@
         .elementor-element-a0b304f .elementor-flip-box__front .elementor-flip-box__layer__title,
         .elementor-element-5afe2a1 .elementor-flip-box__front .elementor-flip-box__layer__title,
         .elementor-element-8198967 .elementor-flip-box__front .elementor-flip-box__layer__title,
+        .elementor-element-1139b39 .elementor-flip-box__front .elementor-flip-box__layer__title,
         .elementor-element-f3825e6 .elementor-flip-box__front .elementor-flip-box__layer__description,
         .elementor-element-449a74c .elementor-flip-box__front .elementor-flip-box__layer__description,
         .elementor-element-0c462d8 .elementor-flip-box__front .elementor-flip-box__layer__description,
         .elementor-element-a0b304f .elementor-flip-box__front .elementor-flip-box__layer__description,
         .elementor-element-5afe2a1 .elementor-flip-box__front .elementor-flip-box__layer__description,
         .elementor-element-8198967 .elementor-flip-box__front .elementor-flip-box__layer__description,
+        .elementor-element-1139b39 .elementor-flip-box__front .elementor-flip-box__layer__description,
         /* Also hide overlay/icon if present to clear view */
         .elementor-element-f3825e6 .elementor-flip-box__front .elementor-flip-box__icon-image,
         .elementor-element-449a74c .elementor-flip-box__front .elementor-flip-box__icon-image,
         .elementor-element-0c462d8 .elementor-flip-box__front .elementor-flip-box__icon-image,
         .elementor-element-a0b304f .elementor-flip-box__front .elementor-flip-box__icon-image,
         .elementor-element-5afe2a1 .elementor-flip-box__front .elementor-flip-box__icon-image,
-        .elementor-element-8198967 .elementor-flip-box__front .elementor-flip-box__icon-image {
+        .elementor-element-8198967 .elementor-flip-box__front .elementor-flip-box__icon-image,
+        .elementor-element-1139b39 .elementor-flip-box__front .elementor-flip-box__icon-image {
              display: none !important;
              opacity: 0 !important;
         }
